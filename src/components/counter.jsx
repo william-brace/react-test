@@ -2,14 +2,31 @@ import React, { Component } from "react";
 
 class Counter extends Component {
   state = {
-    count: 2,
+    count: 1,
+    tags: [],
+  };
+
+  handleIncrement = () => {
+    console.log("clicked!", this);
+    this.setState({ count: this.state.count + 1 });
   };
 
   render() {
     return (
       <React.Fragment>
-        <span>{this.formatCount()}</span>
-        <button>Increment</button>
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        <button
+          onClick={this.handleIncrement}
+          className="btn btn-secondary btn-sm m-2"
+        >
+          Increment
+        </button>
+        <ul>
+          {this.state.tags.length === 0 && "Please Add a Tag"}
+          {this.state.tags.map((tag) => (
+            <li key={tag}>{tag}</li>
+          ))}
+        </ul>
       </React.Fragment>
     );
   }
@@ -18,6 +35,11 @@ class Counter extends Component {
     const { count } = this.state;
 
     return count === 0 ? "Zero" : count;
+  }
+
+  getBadgeClasses() {
+    let badgeClasses = "badge m-2 badge-";
+    return (badgeClasses += this.state.count === 0 ? "warning" : "primary");
   }
 }
 
