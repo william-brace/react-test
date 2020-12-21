@@ -1,12 +1,29 @@
 import React, { Component } from "react";
 
 class Counter extends Component {
+  constructor() {
+    super();
+    console.log("Counter - Constructed");
+  }
+
+  componentDidMount() {
+    console.log("Counter - Mounted");
+  }
+
+  componentDidUpdate() {
+    console.log("Counter - Updated");
+  }
+
+  componentWillUnmount() {
+    console.log("Counter - Unmount");
+  }
   render() {
+    console.log("Counter - Rendered");
     return (
       <div>
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
         <button
-          onClick={() => this.props.onIncrement(this.props.counter )}
+          onClick={() => this.props.onIncrement(this.props.counter)}
           className="btn btn-secondary btn-sm m-2"
         >
           Increment
